@@ -5,7 +5,7 @@ const LogoPage = () => {
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [form] = Form.useForm();
-  const logoId = "6651ab28548b1f711b264d13";
+  const logoId = "6654df2f5fc05f41d0acc9f6";
 
   const onFinish = async (values) => {
     setLoading(true);

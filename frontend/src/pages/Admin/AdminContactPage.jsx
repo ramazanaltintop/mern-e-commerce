@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 const AdminContactPage = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const contactId = "6654432bd4caed6b69839aeb";
+  const contactId = "6654e24c83cf6366bd6bc110";
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {

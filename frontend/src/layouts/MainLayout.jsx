@@ -11,7 +11,7 @@ const MainLayout = ({ children }) => {
   const [isDialogShow, setIsDialogShow] = useState(false);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [logo, setLogo] = useState("");
-  const logoId = "6651ab28548b1f711b264d13";
+  const logoId = "6654df2f5fc05f41d0acc9f6";
   const [isImage, setIsImage] = useState(false);
 
   useEffect(() => {

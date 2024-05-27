@@ -4,7 +4,7 @@ import { message } from "antd";
 
 const ContactPage = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
-  const contactId = "6654432bd4caed6b69839aeb";
+  const contactId = "6654e24c83cf6366bd6bc110";
   const [contact, setContact] = useState();
 
   useEffect(() => {
