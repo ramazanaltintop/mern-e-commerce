@@ -1,15 +1,33 @@
 import { Button, Form, Input, Spin, message } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const AdminContactPage = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
-  const contactId = "6654e24c83cf6366bd6bc110";
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
+  const [contactData, setContactData] = useState([]);
+  const [fetchAllComplete, setFetchAllComplete] = useState(false);
+  const contactId = contactData[0]?._id;
 
-  useEffect(() => {
-    const fetchSingleContact = async () => {
-      setLoading(true);
+  const fetchAllContacts = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/contact`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setContactData(data);
+        setFetchAllComplete(true);
+      } else {
+        message.error("Verileri getirme işlemi başarısız oldu!...");
+      }
+    } catch (error) {
+      console.log("Veri getirme hatası", error);
+    }
+  }, [apiUrl]);
+
+  const fetchSingleContact = useCallback(async () => {
+    setLoading(true);
+    if (fetchAllComplete) {
       try {
         const response = await fetch(`${apiUrl}/api/contact/${contactId}`);
 
@@ -30,6 +48,7 @@ const AdminContactPage = () => {
             phone: data.phone,
             email: data.email,
             date: data.date,
+            isWeekend: data.isWeekend,
           });
         }
       } catch (error) {
@@ -37,9 +56,16 @@ const AdminContactPage = () => {
       } finally {
         setLoading(false);
       }
-    };
+    }
+  }, [apiUrl, form, contactId, fetchAllComplete]);
+
+  useEffect(() => {
+    fetchAllContacts();
+  }, [fetchAllContacts]);
+
+  useEffect(() => {
     fetchSingleContact();
-  }, [apiUrl, form]);
+  }, [fetchSingleContact]);
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -186,6 +212,19 @@ const AdminContactPage = () => {
             {
               required: true,
               message: "Lütfen mağazanın açılış ve kapanış saatlerini giriniz!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Hafta Sonu açık mı?"
+          name="isWeekend"
+          rules={[
+            {
+              required: true,
+              message: "AÇIK yada KAPALI yazabilirsiniz!...",
             },
           ]}
         >

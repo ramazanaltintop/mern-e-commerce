@@ -16,7 +16,7 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
           <p>
             TÜM KIYAFETLERDE YAZ İNDİRİMİ VE ÜCRETSİZ EKSPRES ULUSLARARASI
             TESLİMAT - %50`YE VARAN İNDİRİM!
-            <a href="shop.html"> ŞİMDİ SATIN ALIN</a>
+            <Link to={"/shop"}> ŞİMDİ SATIN ALIN</Link>
           </p>
         </div>
       </div>
@@ -178,12 +178,12 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
                           <h4 className="megamenu-single-subtitle">
                             Suspendisse faucibus nunc et pellentesque
                           </h4>
-                          <a
-                            href="#"
+                          <Link
+                            to={"/shop"}
                             className="megamenu-single-button btn btn-sm"
                           >
                             ŞİMDİ SATIN AL
-                          </a>
+                          </Link>
                         </div>
                       </div>
                     </div>

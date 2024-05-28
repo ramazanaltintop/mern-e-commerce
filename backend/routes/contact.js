@@ -56,4 +56,16 @@ router.put("/:contactId", async (req, res) => {
   }
 });
 
+// Tüm iletişim sayfalarını getirme (Read - All)
+router.get("/", async (req, res) => {
+  try {
+    const contacts = await Contact.find();
+
+    res.status(200).json(contacts);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error." });
+  }
+});
+
 module.exports = router;

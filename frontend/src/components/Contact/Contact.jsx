@@ -80,7 +80,7 @@ const Contact = ({ contact }) => {
                 <div className="contact-info-texts">
                   <strong>Açılış Saatleri</strong>
                   <p className="contact-date">{contact?.date}</p>
-                  <p>Hafta Sonu Kapalı</p>
+                  <p>Hafta Sonu {contact?.isWeekend}</p>
                 </div>
               </div>
             </div>

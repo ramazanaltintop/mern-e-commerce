@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./CampaignSingle.css";
 
 const CampaignSingle = () => {
@@ -8,10 +9,10 @@ const CampaignSingle = () => {
           <h2>Yeni Sezon İndirimi</h2>
           <strong>%40 İNDİRİM</strong>
           <span></span>
-          <a href="#" className="btn btn-lg">
+          <Link to={"/shop"} className="btn btn-lg">
             ŞİMDİ SATIN AL
             <i className="bi bi-arrow-right"></i>
-          </a>
+          </Link>
         </div>
       </div>
     </section>
