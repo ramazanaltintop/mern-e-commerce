@@ -1,11 +1,13 @@
 import { Button, Form, Input, Spin, message } from "antd";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const LogoPage = () => {
   const [loading, setLoading] = useState(false);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const [form] = Form.useForm();
-  const logoId = "6654df2f5fc05f41d0acc9f6";
+  const [logoData, setLogoData] = useState([]);
+  const [fetchAllComplete, setFetchAllComplete] = useState(false);
+  const logoId = logoData[0]?._id;
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -29,10 +31,25 @@ const LogoPage = () => {
       setLoading(false);
     }
   };
+  const fetchAllLogos = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/logo`);
 
-  useEffect(() => {
-    const fetchSingleLogo = async () => {
-      setLoading(true);
+      if (response.ok) {
+        const data = await response.json();
+        setLogoData(data);
+        setFetchAllComplete(true);
+      } else {
+        message.error("Verileri getirme işlemi başarısız oldu!...");
+      }
+    } catch (error) {
+      console.log("Veri getirme hatası", error);
+    }
+  }, [apiUrl]);
+
+  const fetchSingleLogo = useCallback(async () => {
+    setLoading(true);
+    if (fetchAllComplete) {
       try {
         const response = await fetch(`${apiUrl}/api/logo/${logoId}`);
 
@@ -52,9 +69,16 @@ const LogoPage = () => {
       } finally {
         setLoading(false);
       }
-    };
+    }
+  }, [apiUrl, form, logoId, fetchAllComplete]);
+
+  useEffect(() => {
+    fetchAllLogos();
+  }, [fetchAllLogos]);
+
+  useEffect(() => {
     fetchSingleLogo();
-  }, [apiUrl, form]);
+  }, [fetchSingleLogo]);
 
   return (
     <Spin spinning={loading}>

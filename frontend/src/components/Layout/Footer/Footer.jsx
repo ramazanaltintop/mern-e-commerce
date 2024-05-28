@@ -1,8 +1,8 @@
 import React from "react";
 import Policy from "../Policy/Policy";
 import PropTypes from "prop-types";
-import "./Footer.css";
 import { Link } from "react-router-dom";
+import "./Footer.css";
 
 const Footer = ({ logo, isImage }) => {
   return (

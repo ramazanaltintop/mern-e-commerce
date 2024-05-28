@@ -56,4 +56,16 @@ router.put("/:logoId", async (req, res) => {
   }
 });
 
+// Tüm logoları getirme (Read - All)
+router.get("/", async (req, res) => {
+  try {
+    const logos = await Logo.find();
+
+    res.status(200).json(logos);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error." });
+  }
+});
+
 module.exports = router;
