@@ -2,8 +2,15 @@ import { message } from "antd";
 import { useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 
-const CheckoutSessionLineItems = ({ id, results }) => {
+const CheckoutSessionLineItems = ({ id, results, setTotalProductSales }) => {
   const MY_STRIPE_SECRET_KEY = import.meta.env.VITE_API_STRIPE_SECRET_KEY;
+
+  const calculateSelledTotalProducts = useCallback(async () => {
+    setTotalProductSales(0);
+    results?.map((result) => {
+      setTotalProductSales((prev) => prev + result);
+    });
+  }, [results, setTotalProductSales]);
 
   const fetchSessionLineItems = useCallback(async () => {
     try {
@@ -29,15 +36,16 @@ const CheckoutSessionLineItems = ({ id, results }) => {
       }
     } catch (error) {
       console.log("Veri getirme hatası", error);
+    } finally {
+      calculateSelledTotalProducts();
     }
-  }, [MY_STRIPE_SECRET_KEY, id, results]);
+  }, [MY_STRIPE_SECRET_KEY, id, results, calculateSelledTotalProducts]);
 
-  console.log(results);
+  // console.log(results);
 
   useEffect(() => {
     fetchSessionLineItems();
   }, [fetchSessionLineItems]);
-  return <p></p>;
 };
 
 export default CheckoutSessionLineItems;

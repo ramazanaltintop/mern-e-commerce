@@ -8,7 +8,7 @@ const UpdateSlidePage = () => {
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const params = useParams();
   const slideId = params.id;
-  console.log(slideId);
+  // console.log(slideId);
 
   const onFinish = async (values) => {
     setLoading(true);

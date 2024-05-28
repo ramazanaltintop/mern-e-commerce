@@ -15,10 +15,11 @@ const DashboardPage = () => {
   const MY_STRIPE_SECRET_KEY = import.meta.env.VITE_API_STRIPE_SECRET_KEY;
   const [totalPrice, setTotalPrice] = useState(0);
   const [customers] = useState([]);
-  const [customerCount, setCustomerCount] = useState(0);
-  const [totalProductSales, setTotalProductSales] = useState(0);
+  const [numberOfCustomers, setNumberOfCustomers] = useState(0);
+  const [numberOfOrders, setNumberOfOrders] = useState(0);
   const [allCheckoutSessionsIds] = useState([]);
   const [results] = useState([]);
+  const [totalProductSales, setTotalProductSales] = useState(0);
 
   const productSalesData = [
     { name: "Ocak", satilanUrunSayisi: 10 },
@@ -46,21 +47,17 @@ const DashboardPage = () => {
     setTotalPrice(totalPrice);
   };
 
-  const listCustomers = useCallback(
+  const calculateNumberOfCustomers = useCallback(
     (data) => {
       data.map((item) => {
         if (!customers.includes(item.receipt_email)) {
           customers.push(item.receipt_email);
         }
       });
-      calculateCustomerCount(customers.length);
+      setNumberOfCustomers(customers.length);
     },
     [customers]
   );
-
-  const calculateCustomerCount = (customerCount) => {
-    setCustomerCount(customerCount);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -93,45 +90,62 @@ const DashboardPage = () => {
           ]);
 
         const { data } = paymentIntentsData;
+
+        // Toplam gelir hesapla
         calculateTotalPrice(data);
-        listCustomers(data);
-        setTotalProductSales(data.length);
+
+        // Toplam müşteri sayısını hesapla
+        calculateNumberOfCustomers(data);
+
+        // Toplam sipariş sayısını hesapla
+        setNumberOfOrders(data.length);
 
         const sessionData = listAllCheckoutSessionsData;
 
+        // Verilen siparişlerin id bilgileri alındı.
         for (let i = 0; i < sessionData.data.length; i++) {
           allCheckoutSessionsIds.push(sessionData.data[i].id);
         }
-        console.log(allCheckoutSessionsIds);
+
+        // console.log(allCheckoutSessionsIds);
       } catch (error) {
         console.log("Veri getirme hatası", error);
       }
     };
     fetchData();
-  }, [MY_STRIPE_SECRET_KEY, allCheckoutSessionsIds, listCustomers]);
+  }, [
+    MY_STRIPE_SECRET_KEY,
+    allCheckoutSessionsIds,
+    calculateNumberOfCustomers,
+  ]);
 
   return (
     <div>
       <Row gutter={16}>
         <Col span={6}>
           {allCheckoutSessionsIds?.map((id, index) => (
-            <CheckoutSessionLineItems id={id} key={index} results={results} />
+            <CheckoutSessionLineItems
+              id={id}
+              key={index}
+              results={results}
+              setTotalProductSales={setTotalProductSales}
+            />
           ))}
           <Card>
-            <Statistic title="Toplam Ürün Satışı" value={120} />
+            <Statistic title="Toplam Ürün Satışı" value={totalProductSales} />
+          </Card>
+        </Col>
+        <Col span={6}>
+          <Card>
+            <Statistic title="Toplam Sipariş Sayısı" value={numberOfOrders} />
           </Card>
         </Col>
         <Col span={6}>
           <Card>
             <Statistic
-              title="Toplam Sipariş Sayısı"
-              value={totalProductSales}
+              title="Toplam Müşteri Sayısı"
+              value={numberOfCustomers}
             />
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card>
-            <Statistic title="Toplam Müşteri Sayısı" value={customerCount} />
           </Card>
         </Col>
         <Col span={6}>

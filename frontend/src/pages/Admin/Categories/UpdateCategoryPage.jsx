@@ -7,7 +7,7 @@ const UpdateCategoryPage = () => {
   const [form] = Form.useForm();
   const params = useParams();
   const categoryId = params.id;
-  console.log(categoryId);
+  // console.log(categoryId);
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
   const onFinish = async (values) => {
