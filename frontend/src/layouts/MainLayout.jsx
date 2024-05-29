@@ -15,6 +15,51 @@ const MainLayout = ({ children }) => {
   const [logoData, setLogoData] = useState([]);
   const [fetchAllComplete, setFetchAllComplete] = useState(false);
   const logoId = logoData[0]?._id;
+  const [contact, setContact] = useState(Object);
+  const [contactData, setContactData] = useState(Object);
+  const [fetchAllContactComplete, setFetchAllContactComplete] = useState(false);
+  const contactId = contactData[0]?._id;
+
+  const fetchAllContacts = useCallback(async () => {
+    try {
+      const response = await fetch(`${apiUrl}/api/contact`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setContactData(data);
+        setFetchAllContactComplete(true);
+      } else {
+        message.error("Verileri getirme işlemi başarısız oldu!...");
+      }
+    } catch (error) {
+      console.log("Veri getirme hatası", error);
+    }
+  }, [apiUrl]);
+
+  const fetchSingleContact = useCallback(async () => {
+    if (fetchAllContactComplete) {
+      try {
+        const response = await fetch(`${apiUrl}/api/contact/${contactId}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          setContact(data);
+        } else {
+          message.error("Verileri getirme işlemi başarısız oldu!...");
+        }
+      } catch (error) {
+        console.log("Veri getirme hatası", error);
+      }
+    }
+  }, [apiUrl, contactId, fetchAllContactComplete]);
+
+  useEffect(() => {
+    fetchAllContacts();
+  }, [fetchAllContacts]);
+
+  useEffect(() => {
+    fetchSingleContact();
+  }, [fetchSingleContact]);
 
   const fetchAllLogos = useCallback(async () => {
     try {
@@ -82,7 +127,7 @@ const MainLayout = ({ children }) => {
       <Search isSearchShow={isSearchShow} setIsSearchShow={setIsSearchShow} />
       <Header setIsSearchShow={setIsSearchShow} logo={logo} isImage={isImage} />
       {children}
-      <Footer logo={logo} isImage={isImage} />
+      <Footer logo={logo} isImage={isImage} contact={contact} />
     </div>
   );
 };

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-const Footer = ({ logo, isImage }) => {
+const Footer = ({ logo, isImage, contact }) => {
   return (
     <React.Fragment>
       <Policy />
@@ -47,10 +47,10 @@ const Footer = ({ logo, isImage }) => {
                   <h3 className="contact-title">
                     Yardıma mı ihtiyacınız var?
                     <br />
-                    (+90) 111 222 33 44
+                    {contact?.phone}
                   </h3>
                   <p className="contact-desc">
-                    09:00 - 17:00 arası hizmetinizdeyiz.
+                    {contact?.date} arası hizmetinizdeyiz.
                   </p>
                 </div>
                 <div className="footer-contact-bottom">
@@ -82,16 +82,14 @@ const Footer = ({ logo, isImage }) => {
                   </Link>
                 </div>
                 <div className="footer-desc">
-                  <p>
-                    {" "}
-                    Quis ipsum suspendisse ultrices gravida. Risus commodo
-                    viverra maecenas accumsan lacus vel facilisis in termapol.
-                  </p>
+                  <p> {contact?.description}</p>
                 </div>
                 <div className="footer-contact">
                   <p>
-                    <a href="tel:555 555 55 55">(+90) 111 222 33 44</a> –{" "}
-                    <a href="mailto:info@example.com">info@example.com</a>
+                    <Link to={`tel:${contact?.phone}`}>{contact?.phone}</Link> –{" "}
+                    <Link to={`mailto:${contact?.email}`}>
+                      {contact?.email}
+                    </Link>
                   </p>
                 </div>
               </div>
@@ -216,4 +214,5 @@ export default Footer;
 Footer.propTypes = {
   logo: PropTypes.string,
   isImage: PropTypes.bool,
+  contact: PropTypes.object,
 };

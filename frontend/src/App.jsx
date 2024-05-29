@@ -31,7 +31,10 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/shop" element={<ShopPage />} />
+      <Route path="/shop/*">
+        <Route index element={<ShopPage />} />
+        <Route path="product/:id" element={<ProductDetailsPage />} />
+      </Route>
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/cart" element={<CartPage />} />
