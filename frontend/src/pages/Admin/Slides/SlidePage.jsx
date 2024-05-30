@@ -19,10 +19,20 @@ const SlidePage = () => {
       ),
     },
     {
-      title: "Slayt adı",
+      title: "Slayt Adı",
       dataIndex: "name",
       key: "name",
       render: (text) => <b>{text}</b>,
+    },
+    {
+      title: "Slayt Başlığı",
+      dataIndex: "title",
+      key: "title",
+    },
+    {
+      title: "Slayt Alt Başlığı",
+      dataIndex: "subTitle",
+      key: "subTitle",
     },
     {
       title: "İşlemler",

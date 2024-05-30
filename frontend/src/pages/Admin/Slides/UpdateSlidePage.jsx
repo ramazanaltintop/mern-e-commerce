@@ -46,6 +46,8 @@ const UpdateSlidePage = () => {
       if (data) {
         form.setFieldsValue({
           name: data.name,
+          title: data.title,
+          subTitle: data.subTitle,
           img: data.img,
         });
       }
@@ -70,6 +72,32 @@ const UpdateSlidePage = () => {
             {
               required: true,
               message: "Lütfen slayt adını giriniz!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Slayt Başlığı"
+          name="title"
+          rules={[
+            {
+              required: true,
+              message: "Lütfen slayt başlığını giriniz!",
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+
+        <Form.Item
+          label="Slayt Alt Başlığı"
+          name="subTitle"
+          rules={[
+            {
+              required: true,
+              message: "Lütfen slayt alt başlığını giriniz!",
             },
           ]}
         >

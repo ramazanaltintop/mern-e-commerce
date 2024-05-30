@@ -31,7 +31,7 @@ const Sliders = ({ slides }) => {
     <section className="slider">
       <Slider {...sliderSettings}>
         {slides.map((slide) => (
-          <SliderItem slideItem={slide.img} key={slide._id} />
+          <SliderItem slide={slide} slideImg={slide.img} key={slide._id} />
         ))}
       </Slider>
     </section>

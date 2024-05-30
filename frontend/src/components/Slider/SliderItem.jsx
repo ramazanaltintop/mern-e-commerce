@@ -1,15 +1,15 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const SliderItem = ({ slideItem }) => {
+const SliderItem = ({ slideImg, slide }) => {
   return (
     <div className="slider-item fade">
       <div className="slider-image">
-        <img src={slideItem} className="img-fluid" alt="" />
+        <img src={slideImg} className="img-fluid" alt="" />
       </div>
       <div className="container">
-        <p className="slider-title">YAZ 2024</p>
-        <h2 className="slider-heading">%50`ye varan indirim</h2>
+        <p className="slider-title">{slide.title}</p>
+        <h2 className="slider-heading">{slide.subTitle}</h2>
         <Link to={"/shop"} className="btn btn-lg btn-primary">
           Şimdi Keşfet
         </Link>
@@ -21,5 +21,6 @@ const SliderItem = ({ slideItem }) => {
 export default SliderItem;
 
 SliderItem.propTypes = {
-  slideItem: PropTypes.string,
+  slideImg: PropTypes.string,
+  slide: PropTypes.object,
 };
