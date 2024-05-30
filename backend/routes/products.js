@@ -100,4 +100,19 @@ router.get("/search/:productName", async (req, res) => {
     res.status(500).json({ error: "Server error." });
   }
 });
+
+// Ürünleri categoryId bilgisine göre getirme
+router.get("/filter/:categoryId", async (req, res) => {
+  try {
+    const categoryId = req.params.categoryId;
+
+    const products = await Product.find({ category: categoryId });
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Server error." });
+  }
+});
+
 module.exports = router;

@@ -26,6 +26,7 @@ import DashboardPage from "./pages/Admin/Dashboard/DashboardPage";
 import LogoPage from "./pages/Admin/LogoPage";
 import AdminContactPage from "./pages/Admin/AdminContactPage";
 import "./App.css";
+import ListProductsByCategory from "./components/Categories/ListProductsByCategory";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
       <Route path="/shop/*">
         <Route index element={<ShopPage />} />
         <Route path="product/:id" element={<ProductDetailsPage />} />
+        <Route path="products/:id" element={<ListProductsByCategory />} />
+        <Route path="products/:id/:id" element={<ProductDetailsPage />} />
       </Route>
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/contact" element={<ContactPage />} />
@@ -42,6 +45,8 @@ function App() {
       <Route path="/product/:id" element={<ProductDetailsPage />} />
       <Route path="/blog/:id" element={<BlogDetailsPage />} />
       <Route path="/success" element={<Success />} />
+      <Route path="/products/:id" element={<ListProductsByCategory />} />
+      <Route path="/products/:id/:id" element={<ProductDetailsPage />} />
       <Route path="/admin/*">
         <Route index element={<DashboardPage />} />
         <Route path="users" element={<UserPage />} />
