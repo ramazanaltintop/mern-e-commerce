@@ -2,12 +2,31 @@ import CartProgress from "./CartProgress";
 import CartTable from "./CartTable";
 import CartCoupon from "./CartCoupon";
 import CartTotals from "./CartTotals";
-import { useContext } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartProvider";
 import "./Cart.css";
+import { message } from "antd";
 
 const Cart = () => {
   const { cartItems } = useContext(CartContext);
+  const [isCouponApplied, setIsCouponApplied] = useState(false);
+
+  // Kupon kodunu silme işlevi
+  const removeCoupon = useCallback(() => {
+    // Kupon kodu uygulama durumunu sıfırla
+    if (localStorage.getItem("appliedCoupon")) {
+      setIsCouponApplied(false);
+      // LocalStorage'daki kupon kodu bilgisini sil
+      localStorage.removeItem("appliedCoupon");
+      message.success("Kupon kodu başarıyla kaldırıldı.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!(cartItems.length > 0)) {
+      removeCoupon();
+    }
+  }, [removeCoupon, cartItems.length]);
 
   return (
     <section className="cart-page">
@@ -18,7 +37,10 @@ const Cart = () => {
               <CartProgress />
               <div className="shop-table-wrapper">
                 <CartTable />
-                <CartCoupon />
+                <CartCoupon
+                  isCouponApplied={isCouponApplied}
+                  setIsCouponApplied={setIsCouponApplied}
+                />
               </div>
             </form>
             <div className="cart-collaterals">

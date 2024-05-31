@@ -1,8 +1,9 @@
 import { message } from "antd";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../context/CartProvider";
+import { PropTypes } from "prop-types";
 
-const CartCoupon = () => {
+const CartCoupon = ({ isCouponApplied, setIsCouponApplied }) => {
   const [couponCode, setCouponCode] = useState("");
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
   const { cartItems, setCartItems } = useContext(CartContext);
@@ -10,6 +11,10 @@ const CartCoupon = () => {
   const applyCoupon = async () => {
     if (couponCode.trim().length === 0) {
       message.warning("Boş değer giremezsiniz!...");
+      return;
+    }
+    if (isCouponApplied) {
+      message.warning("Kupon kodu zaten uygulandı!...");
       return;
     }
     try {
@@ -30,6 +35,8 @@ const CartCoupon = () => {
       });
 
       setCartItems(updatedCartItems);
+      setIsCouponApplied(true);
+      localStorage.setItem("appliedCoupon", couponCode);
 
       message.success(
         `${couponCode} adlı kupon kodu başarılı bir şekilde uygulandı!...`
@@ -38,6 +45,13 @@ const CartCoupon = () => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    const storedCoupon = localStorage.getItem("appliedCoupon");
+    if (storedCoupon) {
+      setIsCouponApplied(true);
+    }
+  }, [setIsCouponApplied]);
 
   return (
     <div className="actions-wrapper">
@@ -61,3 +75,8 @@ const CartCoupon = () => {
 };
 
 export default CartCoupon;
+
+CartCoupon.propTypes = {
+  isCouponApplied: PropTypes.bool,
+  setIsCouponApplied: PropTypes.func,
+};
