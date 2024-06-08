@@ -25,8 +25,9 @@ import OrderPage from "./pages/Admin/OrderPage";
 import DashboardPage from "./pages/Admin/Dashboard/DashboardPage";
 import LogoPage from "./pages/Admin/LogoPage";
 import AdminContactPage from "./pages/Admin/AdminContactPage";
-import "./App.css";
 import ListProductsByCategory from "./components/Categories/ListProductsByCategory";
+import Orders from "./components/Auth/Orders";
+import "./App.css";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
       <Route path="/blog" element={<BlogPage />} />
       <Route path="/contact" element={<ContactPage />} />
       <Route path="/cart" element={<CartPage />} />
+      <Route path="/orders" element={<Orders />} />
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/product/:id" element={<ProductDetailsPage />} />
       <Route path="/blog/:id" element={<BlogDetailsPage />} />

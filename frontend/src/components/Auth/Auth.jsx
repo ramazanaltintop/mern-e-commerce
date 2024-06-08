@@ -4,6 +4,7 @@ import UserDetails from "./UserDetails";
 import React, { useState } from "react";
 import UpdateUser from "./UpdateUser";
 import "./Auth.css";
+import Orders from "./Orders";
 
 const Auth = () => {
   const user = localStorage.getItem("user")
@@ -11,16 +12,25 @@ const Auth = () => {
     : null;
 
   const [userDetails, setUserDetails] = useState(Object);
+  const [isOrderDetail, setIsOrderDetail] = useState(false);
 
   return (
     <section className="account-page">
       <div className="container">
         <div className="account-wrapper">
           {user ? (
-            <React.Fragment>
-              <UserDetails user={user} userDetails={userDetails} />
-              <UpdateUser user={user} setUserDetails={setUserDetails} />
-            </React.Fragment>
+            isOrderDetail ? (
+              <Orders email={userDetails.email} />
+            ) : (
+              <React.Fragment>
+                <UserDetails
+                  user={user}
+                  userDetails={userDetails}
+                  setIsOrderDetail={setIsOrderDetail}
+                />
+                <UpdateUser user={user} setUserDetails={setUserDetails} />
+              </React.Fragment>
+            )
           ) : (
             <React.Fragment>
               <Login /> <Register />

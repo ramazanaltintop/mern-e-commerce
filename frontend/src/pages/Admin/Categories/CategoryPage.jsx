@@ -9,6 +9,8 @@ const CategoryPage = () => {
 
   const apiUrl = import.meta.env.VITE_API_BASE_URL;
 
+  console.log(dataSource);
+
   const columns = [
     {
       title: "Kategori Resmi",

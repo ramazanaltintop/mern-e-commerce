@@ -1,6 +1,11 @@
+import { Button } from "antd";
 import PropTypes from "prop-types";
 
-const UserDetails = ({ userDetails, user }) => {
+const UserDetails = ({ userDetails, user, setIsOrderDetail }) => {
+  const handleClick = () => {
+    setIsOrderDetail(true);
+  };
+
   return (
     <div className="account-column">
       <h2>Bilgileriniz</h2>
@@ -31,6 +36,11 @@ const UserDetails = ({ userDetails, user }) => {
             <span>{user.role}</span>
           </label>
         </div>
+        <div>
+          <Button type="primary" htmlType="submit" onClick={handleClick}>
+            Siparişlerim
+          </Button>
+        </div>
       </form>
     </div>
   );
@@ -39,6 +49,7 @@ const UserDetails = ({ userDetails, user }) => {
 UserDetails.propTypes = {
   userDetails: PropTypes.object,
   user: PropTypes.object,
+  setIsOrderDetail: PropTypes.func,
 };
 
 export default UserDetails;
