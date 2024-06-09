@@ -82,9 +82,9 @@ const Login = () => {
           </label>
           <button className="btn btn-sm">Giriş</button>
         </p>
-        <a href="#" className="form-link">
+        {/* <a href="#" className="form-link">
           Parolanızı unuttunuz mu?
-        </a>
+        </a> */}
       </form>
     </div>
   );
