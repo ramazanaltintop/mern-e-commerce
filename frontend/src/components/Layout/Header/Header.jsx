@@ -14,8 +14,7 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
       <div className="global-notification">
         <div className="container">
           <p>
-            TÜM KIYAFETLERDE YAZ İNDİRİMİ VE ÜCRETSİZ EKSPRES ULUSLARARASI
-            TESLİMAT - %50`YE VARAN İNDİRİM!
+            TÜM KIYAFETLERDE %50`YE VARAN İNDİRİMLER
             <Link to={"/shop"}> ŞİMDİ SATIN ALIN</Link>
           </p>
         </div>

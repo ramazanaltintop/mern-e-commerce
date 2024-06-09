@@ -57,10 +57,10 @@
 }
 
 .slider-buttons button:hover {
-  background-color: #1367ef;
+  background-color: crimson;
   opacity: 1;
   color: #fff;
-  border-color: #1367ef;
+  border-color: crimson;
 }
 
 .slider-buttons button i {
@@ -92,7 +92,7 @@
   display: inline-block;
   width: 12px;
   height: 12px;
-  background-color: #1367ef;
+  background-color: crimson;
   border-radius: 100%;
 }
 

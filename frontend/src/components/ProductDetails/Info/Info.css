@@ -169,9 +169,9 @@
 }
 
 .site-main .cart-button button:disabled {
-  background-color: #1367ef;
+  background-color: crimson;
   color: #fff;
-  border-color: #1367ef;
+  border-color: crimson;
 }
 
 .site-main .product-extra-buttons {
