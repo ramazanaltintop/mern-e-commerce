@@ -41,9 +41,9 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
                       }`}
                     >
                       Anasayfa
-                      <i className="bi bi-chevron-down"></i>
+                      {/* <i className="bi bi-chevron-down"></i> */}
                     </Link>
-                    <div className="menu-dropdown-wrapper">
+                    {/* <div className="menu-dropdown-wrapper">
                       <ul className="menu-dropdown-content">
                         <li>
                           <a href="#">Home Clean</a>
@@ -73,9 +73,10 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
                           <a href="#">Home RTL</a>
                         </li>
                       </ul>
-                    </div>
+                    </div> */}
                   </li>
-                  <li className="menu-list-item megamenu-wrapper">
+                  {/* megamenu-wrapper */}
+                  <li className="menu-list-item">
                     <Link
                       to={"/shop"}
                       className={`menu-link ${
@@ -83,9 +84,9 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
                       }`}
                     >
                       Mağaza
-                      <i className="bi bi-chevron-down"></i>
+                      {/* <i className="bi bi-chevron-down"></i> */}
                     </Link>
-                    <div className="menu-dropdown-wrapper">
+                    {/* <div className="menu-dropdown-wrapper">
                       <div className="menu-dropdown-megamenu">
                         <div className="megamenu-links">
                           <div className="megamenu-products">
@@ -185,9 +186,9 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
                           </Link>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </li>
-                  <li className="menu-list-item">
+                  {/* <li className="menu-list-item">
                     <Link
                       to={"/blog"}
                       className={`menu-link ${
@@ -196,7 +197,7 @@ const Header = ({ setIsSearchShow, logo, isImage }) => {
                     >
                       Blog
                     </Link>
-                  </li>
+                  </li> */}
                   <li className="menu-list-item">
                     <Link
                       to={"/contact"}
