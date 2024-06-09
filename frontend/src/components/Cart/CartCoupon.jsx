@@ -67,9 +67,9 @@ const CartCoupon = ({ isCouponApplied, setIsCouponApplied }) => {
           Kuponu kaydet
         </button>
       </div>
-      <div className="update-cart">
+      {/* <div className="update-cart">
         <button className="btn">Sepeti Güncelle</button>
-      </div>
+      </div> */}
     </div>
   );
 };

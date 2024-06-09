@@ -100,9 +100,9 @@ const CartTotals = () => {
                     />
                   </label>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#">Adres Değiştir</a>
-                </li>
+                </li> */}
               </ul>
             </td>
           </tr>
