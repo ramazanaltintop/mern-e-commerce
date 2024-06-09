@@ -38,7 +38,7 @@
 }
 
 .campaign-single .campaign-wrapper > a:hover {
-  background-color: crimson;
-  border-color: crimson;
+  background-color: teal;
+  border-color: teal;
   color: #fff;
 }

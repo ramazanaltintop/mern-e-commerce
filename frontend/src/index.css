@@ -74,14 +74,14 @@ button:disabled {
 }
 
 .btn-primary {
-  background-color: crimson;
+  background-color: teal;
   color: #fff;
-  border-color: crimson;
+  border-color: teal;
 }
 
 .btn-primary:hover {
   background-color: #fff;
-  color: crimson;
+  color: teal;
 }
 
 textarea {
